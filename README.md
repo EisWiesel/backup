@@ -69,5 +69,4 @@ backup -> json array which holds backupsources
 input -> source of the backup, this will be passed as parameter to rsync
 output -> leave empty... or write a different name for this backupsource if you want so
 
-
 I will add more details later...
