@@ -28,6 +28,7 @@ I will add details later...
 Command-line based. This script is executed from the command-line. I suggest using a cronjob to run it. 
 All preferences like backup-targets, number of backups etc need to be stored in a configurationfile, called backup.json ... see backup.json.example for details
 
+Format of the configfile:
 
 {
 	"backup_path":"/path/to/a/local/place/",
@@ -69,3 +70,4 @@ input -> source of the backup, this will be passed as parameter to rsync
 output -> leave empty... or write a different name for this backupsource if you want so
 
 I will add more details later...
+
