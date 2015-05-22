@@ -14,13 +14,13 @@ I will add details later...
 - perlmodules Data::Dumper, File::Path and JSON are needed
 - the commandline programs "cp" and "rsync" are needed
 - on each backup-target should run an rsync-server (on windows, you can run "deltacopy" which is a free but slow rsync-server)
-- you need to setup ssh key authentication on each backup-target server
+- you need to setup ssh key authentication for each backup-target on your backupserver
 - cron-server to run this script through a cronjob
 
 - I will add details later...
 
 **Installation:**
-You should create a directory and put that script, along with its configurationfile into that directory.
+You should create a directory and put that script, along with its configurationfile into that directory. The configfile must have the filename "backup.json" and has to be in the same directory as the backupscript. 
 
 I will add details later...
 
