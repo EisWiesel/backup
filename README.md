@@ -29,7 +29,7 @@ Command-line based. This script is executed from the command-line. I suggest usi
 All preferences like backup-targets, number of backups etc need to be stored in a configurationfile, called backup.json ... see backup.json.example for details
 
 Format of the configfile:
-`
+```json
 {
 	"backup_path":"/path/to/a/local/place/",
 	"backup_targets":[
@@ -59,15 +59,15 @@ Format of the configfile:
 		}
 	]
 }
+```
 
 Explanation:
-backup_path -> path where this script should be and where to store all the backups
-backup_targets -> an json array with the backup-targets
-name -> name for the backup, each backup will be saved with this name
-keep -> number of max backups before they will be rotated
-backup -> json array which holds backupsources
-input -> source of the backup, this will be passed as parameter to rsync
-output -> leave empty... or write a different name for this backupsource if you want so
-`
-I will add more details later...
+- backup_path -> path where this script should be and where to store all the backups
+- backup_targets -> an json array with the backup-targets
+- name -> name for the backup, each backup will be saved with this name
+- keep -> number of max backups before they will be rotated
+- backup -> json array which holds backupsources
+- input -> source of the backup, this will be passed as parameter to rsync
+- output -> leave empty... or write a different name for this backupsource if you want so
 
+I will add more details later...
