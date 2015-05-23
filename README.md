@@ -3,6 +3,8 @@ backup
 
 A small and simple backupscript which makes incremental recursive backups of directories from local and remote mashines, saving them in ordered human readable timestamped directories using rsync, locks and hardlinks. This script makes a lot of checks and tests to prevent errors. All preferences can be controlled with one configurationfile.
 
+Because its using hardlinks, the incremental backup which comes next to the first full backup will only take space of changed files. 
+
 **enviroment, depencies, installation, interface, usage...**
 
 **Enviroment:**
