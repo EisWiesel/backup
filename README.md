@@ -53,6 +53,7 @@ Format of the configfile:
                 {
 			"name":"name_for_backup_of_remote_mashine",
 			"keep":5,
+			"rsync_options":"--archive --delete",
 			"backup":[
 				{
 					"input":"root@192.168.0.100:/etc",
@@ -69,6 +70,7 @@ Explanation:
 - backup_targets -> an json array with the backup-targets
 - name -> name for the backup, each backup will be saved with this name
 - keep -> number of max backups before they will be rotated
+- rsync_options -> options applied to rsync when syncing to destination
 - backup -> json array which holds backupsources
 - input -> source of the backup, this will be passed as parameter to rsync
 - output -> leave empty... or write a different name for this backupsource if you want so
