@@ -38,6 +38,7 @@ Format of the configfile:
 		{
 			"name":"name_for_backup_of_local_mashine",
 			"keep":5,
+			"rsync_options":"--archive --delete",
 			"backup":[
 				{
 					"input":"/etc",
