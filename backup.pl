@@ -44,8 +44,10 @@ foreach my $backup_target ( @{ $json_config->{'backup_targets'} } ) {
 		if ( !exists( $backup_target->{'name'} ) );
 	die( "no keep found!\n" )
 		if ( !exists( $backup_target->{'keep'} ) );
-	die( "no backup inpout/output!\n" )
-		if ( !exists( $backup_target->{'backup'} ) || scalar( @{ $backup_target->{'backup'} } ) < 1 );	
+	die( "no backup input/output!\n" )
+		if ( !exists( $backup_target->{'backup'} ) || scalar( @{ $backup_target->{'backup'} } ) < 1 );
+	die( "no rsync options!\n" )
+		if ( !exists( $backup_target->{'rsync_options'} ) );
 	foreach my $inout ( @{ $backup_target->{'backup'} } ) {
 		die ( "incorrect input/output pair found in '" . $backup_target->{'name'} . "'!\n" )
 			if ( !exists( $inout->{'input'} ) || !exists( $inout->{'output'} ) );
@@ -71,7 +73,8 @@ foreach my $backup_target ( @{ $json_config->{'backup_targets'} } ) {
 			$json_config->{'backup_path'}, 
 			$backup_target->{'name'}, 
 			$timestamp, 
-			$backup_target->{'backup'}
+			$backup_target->{'backup'},
+			$backup_target->{'rsync_options'}
 		);
 	} else {
 
@@ -84,7 +87,8 @@ foreach my $backup_target ( @{ $json_config->{'backup_targets'} } ) {
 			$json_config->{'backup_path'}, 
 			$backup_target->{'name'}, 
 			$timestamp, 
-			$backup_target->{'backup'}
+			$backup_target->{'backup'},
+			$backup_target->{'rsync_options'}
 		);
 	}
 
@@ -124,6 +128,7 @@ sub make_backup {
 	my $backup_name      = shift;
 	my $backup_timestamp = shift;
 	my $backup_dirs      = shift;
+	my $rsync_options    = shift;
 
 	if ( -e $backup_path . $backup_name . "/" . $backup_timestamp . ".lock" ) {
 		die( "lockfile '" . $backup_path . $backup_name . "/" . $backup_timestamp . ".lock' already exists\n" );
@@ -133,7 +138,7 @@ sub make_backup {
 	}
 	
 	foreach my $backup ( @{ $backup_dirs } ) {
-		if ( $backup->{'output'} ne '' ) {
+		if ( $backup->{'output'} ne '' && ! -e $backup_path . $backup_name . "/" . $backup_timestamp . "/" . $backup->{'output'} ) {
 			mkdir( $backup_path . $backup_name . "/" . $backup_timestamp . "/" . $backup->{'output'} )
 				or die( $! );
 		}
@@ -141,7 +146,7 @@ sub make_backup {
 		my $input_dir  = $backup->{'input'};
 		my $output_dir = $backup_path . $backup_name . "/" . $backup_timestamp . "/" . $backup->{'output'};
 		
-		`rsync --archive --delete $input_dir $output_dir`;
+		`rsync $rsync_options $input_dir $output_dir`;
 		
 		print "rsync on '" . $output_dir . "' for '" . $input_dir . "' done\n";
 	}
