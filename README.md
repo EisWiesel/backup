@@ -10,15 +10,13 @@ Because its using hardlinks, the incremental backup which comes next to the firs
 **Enviroment:**
 This script has only been tested on a gentoo linux x64 machine with perl5 and ext3/ext4 filesystem
 
-I will add details later...
-
-**Depencies:**
-*backup server*
+**Depencies on backup server**
 * perlmodules Data::Dumper, File::Path and JSON are needed
 * the commandline programs "cp" and "rsync" are needed
   * cp and filesystem must support the hardlink-switch "--link"
 * you need to setup ssh key authentication for each backup-target on your backupserver
-*backup client*
+
+**Depencies on backup client**
 * rsync-server on each backup client 
 * on windows, you can run "deltacopy" which is a free and easy to use rsync-server (cygwin port)
   * I recommend using the windows internal backup function to create a local backup first, then using this script to backup it on the backup server. This way, you dont have to mess with links and too long filenames.
