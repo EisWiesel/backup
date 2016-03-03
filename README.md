@@ -8,18 +8,21 @@ Because its using hardlinks, the incremental backup which comes next to the firs
 **enviroment, depencies, installation, interface, usage...**
 
 **Enviroment:**
-This script has only been tested on a gentoo linux x64 machine with perl5. 
+This script has only been tested on a gentoo linux x64 machine with perl5 and ext3/ext4 filesystem
 
 I will add details later...
 
-**Depencies:** 
-- perlmodules Data::Dumper, File::Path and JSON are needed
-- the commandline programs "cp" and "rsync" are needed
-- on each backup-target should run an rsync-server (on windows, you can run "deltacopy" which is a free but slow rsync-server)
-- you need to setup ssh key authentication for each backup-target on your backupserver
-- cron-server to run this script through a cronjob
+**Depencies:**
+*backup server*
+* perlmodules Data::Dumper, File::Path and JSON are needed
+* the commandline programs "cp" and "rsync" are needed
+  * cp and filesystem must support the hardlink-switch "--link"
+* you need to setup ssh key authentication for each backup-target on your backupserver
+*backup client*
+* rsync-server on each backup client 
+* on windows, you can run "deltacopy" which is a free and easy to use rsync-server (cygwin port)
+  * I recommend using the windows internal backup function to create a local backup first, then using this script to backup it on the backup server. This way, you dont have to mess with links and too long filenames.
 
-- I will add details later...
 
 **Installation:**
 You should create a directory and put that script, along with its configurationfile into that directory. The configfile must have the filename "backup.json" and has to be in the same directory as the backupscript. 
